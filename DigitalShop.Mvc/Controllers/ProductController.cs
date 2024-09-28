@@ -20,25 +20,13 @@ namespace DigitalShop.Mvc.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Product> objList = _context.Products.Include(c => c.Category).ToList();
+            IEnumerable<Product> objList = _context.Products.Include(c => c.Category);
             return View(objList);
         }
 
         //GET - UPSERT
         public IActionResult Upsert(int? id)
         {
-            //IEnumerable<SelectListItem> CategoryDropDown = _context.Categories.Select(c => new SelectListItem
-            //{
-            //    Text = c.Name,
-            //    Value = c.Id.ToString(),
-            //});
-
-            ////ViewBag.CategoryDropDown = CategoryDropDown;
-            //ViewData["CategoryDropDown"] = CategoryDropDown;
-
-            //Product product = new Product();
-
-
             ProductVM productVM = new ProductVM()
             {
                 Product = new Product(),
@@ -135,29 +123,43 @@ namespace DigitalShop.Mvc.Controllers
         //GET - DELETE
         public IActionResult Delete(int? id)
         {
-            if (id == null || id == 0)
+            if (id == null && id == 0)
             {
                 return NotFound();
             }
-            var obj = _context.Categories.Find(id);
-            if (obj == null)
+
+            Product product = _context.Products.Include(p => p.Category).FirstOrDefault(p => p.Id == id);
+
+            if ( product == null)
             {
                 return NotFound();
             }
-            return View(obj);
+
+            return View(product);
         }
 
         //POST - DELETE
-        [HttpPost]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeletePost(int? id)
         {
-            var obj = _context.Categories.Find(id);
+            var obj = _context.Products.Find(id);
+
             if (obj == null)
             {
                 return NotFound();
             }
-            _context.Categories.Remove(obj);
+
+            string upload = _webHostEnvironment.WebRootPath + WC.ImagePath;
+            var oldFile = Path.Combine(upload, obj.Image);
+
+
+            if (System.IO.File.Exists(oldFile))
+            {
+                System.IO.File.Delete(oldFile);
+            }
+
+            _context.Products.Remove(obj);
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
