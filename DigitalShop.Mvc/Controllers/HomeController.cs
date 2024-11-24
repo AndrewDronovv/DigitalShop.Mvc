@@ -1,32 +1,53 @@
-using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 using DigitalShop.Models;
+using DigitalShop.Mvc.Data;
+using DigitalShop.Mvc.Models.ViewModels;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
-namespace WebApplication1.Controllers
+namespace DigitalShop.Mvc.Controllers;
+
+public class HomeController : Controller
 {
-    public class HomeController : Controller
+    private readonly ILogger<HomeController> _logger;
+    private readonly AppDbContext _context;
+
+    public HomeController(ILogger<HomeController> logger, AppDbContext context)
     {
-        private readonly ILogger<HomeController> _logger;
+        _logger = logger;
+        _context = context;
+    }
 
-        public HomeController(ILogger<HomeController> logger)
+    public IActionResult Index()
+    {
+        HomeVM homeVM = new HomeVM
         {
-            _logger = logger;
-        }
+            Products = _context.Products.Include(u => u.Category).Include(u => u.ApplicationType),
+            Categories = _context.Categories
+        };
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+        return View(homeVM);
+    }
 
-        public IActionResult Privacy()
+    public IActionResult Details(int id)
+    {
+        DetailsVM detailsVM = new DetailsVM()
         {
-            return View();
-        }
+            Product = _context.Products.Include(u => u.Category).Include(u => u.ApplicationType).FirstOrDefault(u => u.Id == id),
+            ExistsInCart = false
+        };
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        return View(detailsVM);
+    }
+
+    public IActionResult Privacy()
+    {
+        return View();
+    }
+
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
+    {
+        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }
