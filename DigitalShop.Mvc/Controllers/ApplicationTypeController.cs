@@ -1,7 +1,8 @@
 ﻿using DigitalShop.Mvc.Data;
-using DigitalShop.Mvc.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using DigitalShop.Models;
+using DigitalShop.Utility;
 
 namespace DigitalShop.Mvc.Controllers;
 

@@ -1,10 +1,10 @@
 ﻿using DigitalShop.Mvc.Data;
-using DigitalShop.Mvc.Models;
-using DigitalShop.Mvc.Models.ViewModels;
-using DigitalShop.Mvc.Utility;
+using DigitalShop.Models;
+using DigitalShop.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using DigitalShop.Models.ViewModels;
 
 namespace DigitalShop.Mvc.Controllers;
 
@@ -82,13 +82,13 @@ public class CartController : Controller
 
         return View(ProductUserVM);
     }
-    
+
     [HttpPost]
     [ValidateAntiForgeryToken]
     [ActionName("Summary")]
     public IActionResult SummaryPost(ProductUserVM productUserVM)
     {
-        
+
 
         return RedirectToAction(nameof(InquiryConfirmation));
     }

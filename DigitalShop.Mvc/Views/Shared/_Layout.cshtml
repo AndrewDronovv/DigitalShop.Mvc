@@ -1,4 +1,5 @@
-﻿@using DigitalShop.Mvc.Utility
+﻿@using DigitalShop.Models
+@using DigitalShop.Utility
 @using Microsoft.AspNetCore.Http
 @inject IHttpContextAccessor HttpContextAccessor
 
@@ -7,17 +8,22 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - DigitalShop.Mvc</title>
+    <title>@ViewData["Title"] - DigitalShop</title>
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/DigitalShop.Mvc.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/lib/summernote/summernote-bs5.min.css" />
+
+    @* <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> *@
+
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
             <div class="container-fluid">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index"><img src="~/images/tile.png" style="width:40%" /></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -28,19 +34,19 @@
                     <ul class="navbar-nav flex-grow-1">
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        
+
                         @if (User.IsInRole(WC.AdminRole))
                         {
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Content management</a>
                                 <ul class="dropdown-menu">
-                                    <a class="nav-link text-dark" asp-controller="Category" asp-action="Index">Category</a>
-                                    <a class="nav-link text-dark" asp-controller="ApplicationType" asp-action="Index">Application type</a>
-                                    <a class="nav-link text-dark" asp-controller="Product" asp-action="Index">Product</a>
+                                    <a class="dropdown-item" asp-controller="Category" asp-action="Index">Category</a>
+                                    <a class="dropdown-item" asp-controller="ApplicationType" asp-action="Index">Application type</a>
+                                    <a class="dropdown-item" asp-controller="Product" asp-action="Index">Product</a>
                                     <li><hr class="dropdown-divider"></li>
-                                    <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Create Admin User</a>
+                                    <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Register">Create Admin User</a>
                                 </ul>
                             </li>
                         }
@@ -75,11 +81,21 @@
         </main>
     </div>
 
+    <footer class="border-top footer bg-dark">
+        <div class="container text-white-50">
+             2025 Shop
+        </div>
+
+    </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    @* <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script> *@
+    <script src="~/lib/summernote/summernote-bs5.min.js"></script>
+
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

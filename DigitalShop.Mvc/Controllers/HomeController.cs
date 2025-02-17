@@ -1,11 +1,9 @@
 using DigitalShop.Models;
+using DigitalShop.Models.ViewModels;
 using DigitalShop.Mvc.Data;
-using DigitalShop.Mvc.Models;
-using DigitalShop.Mvc.Models.ViewModels;
-using DigitalShop.Mvc.Utility;
+using DigitalShop.Utility;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Win32.SafeHandles;
 using System.Diagnostics;
 
 namespace DigitalShop.Mvc.Controllers;

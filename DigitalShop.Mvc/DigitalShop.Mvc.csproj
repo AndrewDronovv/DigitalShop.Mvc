@@ -24,4 +24,10 @@
     <Folder Include="wwwroot\images\product\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DigitalShop.Access\DigitalShop.Access.csproj" />
+    <ProjectReference Include="..\DigitalShop.Models\DigitalShop.Models.csproj" />
+    <ProjectReference Include="..\DigitalShop.Utility\DigitalShop.Utility.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,6 +1,7 @@
-﻿using DigitalShop.Mvc.Data;
-using DigitalShop.Mvc.Models;
-using DigitalShop.Mvc.Models.ViewModels;
+﻿using DigitalShop.Models;
+using DigitalShop.Models.Models.ViewModels;
+using DigitalShop.Mvc.Data;
+using DigitalShop.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;

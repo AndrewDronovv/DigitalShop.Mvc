@@ -1,4 +1,5 @@
-﻿@using DigitalShop.Mvc.Models.ViewModels
+﻿@using DigitalShop.Models.ViewModels
+@using DigitalShop.Utility
 @model DetailsVM
 
 <div class="">
@@ -24,8 +25,8 @@
                                 <div class="row pl-3">
 
                                     <div class="col-12">
-                                        <span class="badge p-3 border" style="background-color:lightcoral">@Model.Product.Category.Name</span>
-                                        <span class="badge p-3 border" style="background-color:lightseagreen">@Model.Product.ApplicationType.Name</span>
+                                        <span class="badge p-3 border text-dark" style="background-color:lightcoral">@Model.Product.Category.Name</span>
+                                        <span class="badge p-3 border text-dark" style="background-color:lightseagreen">@Model.Product.ApplicationType.Name</span>
                                         <h3 class="text-success"></h3>
 
                                         <p class="text-secondary">@Html.Raw(Model.Product.Description)</p>
