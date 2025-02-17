@@ -22,22 +22,29 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <partial name="_LoginPartial" />
+
                     <ul class="navbar-nav flex-grow-1">
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Content management
-                            </a>
-                            <ul class="dropdown-menu">
-                                <a class="nav-link text-dark" asp-controller="Category" asp-action="Index">Category</a>
-                                <a class="nav-link text-dark" asp-controller="ApplicationType" asp-action="Index">Application type</a>
-                                <a class="nav-link text-dark" asp-controller="Product" asp-action="Index">Product</a>
-                                <li><hr class="dropdown-divider"></li>
-                            </ul>
-                        </li>
+                        
+                        @if (User.IsInRole(WC.AdminRole))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Content management</a>
+                                <ul class="dropdown-menu">
+                                    <a class="nav-link text-dark" asp-controller="Category" asp-action="Index">Category</a>
+                                    <a class="nav-link text-dark" asp-controller="ApplicationType" asp-action="Index">Application type</a>
+                                    <a class="nav-link text-dark" asp-controller="Product" asp-action="Index">Product</a>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Create Admin User</a>
+                                </ul>
+                            </li>
+                        }
+
                         <li>
                             @if (HttpContextAccessor.HttpContext.Session.Get<List<ShoppingCart>>(WC.SessionCart) != null)
                             {
@@ -56,6 +63,7 @@
                                 </a>
                             }
                         </li>
+
                     </ul>
                 </div>
             </div>

@@ -1,9 +1,11 @@
 ﻿using DigitalShop.Mvc.Data;
 using DigitalShop.Mvc.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DigitalShop.Mvc.Controllers;
 
+[Authorize(Roles = WC.AdminRole)]
 public class CategoryController : Controller
 {
     private readonly AppDbContext _context;

@@ -1,12 +1,14 @@
 ﻿using DigitalShop.Mvc.Data;
 using DigitalShop.Mvc.Models;
 using DigitalShop.Mvc.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace DigitalShop.Mvc.Controllers;
 
+[Authorize(Roles = WC.AdminRole)]
 public class ProductController : Controller
 {
     private readonly AppDbContext _context;
